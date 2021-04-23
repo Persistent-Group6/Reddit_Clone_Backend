@@ -23,9 +23,7 @@ import io.jsonwebtoken.Jwts;
 @Service
 public class JwtProvider {
 
-    
     private KeyStore keyStore;
-
 
     @PostConstruct
     public void init() {
@@ -39,13 +37,10 @@ public class JwtProvider {
 
     }
 
-
-    public String generateToken(Authentication authentication){
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
-        return Jwts.builder()
-                .setSubject(principal.getUsername())
-                .signWith(getPrivateKey())
-                .compact();
+    public String generateToken(Authentication authentication) {
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication
+                .getPrincipal();
+        return Jwts.builder().setSubject(principal.getUsername()).signWith(getPrivateKey()).compact();
     }
 
     private PrivateKey getPrivateKey() {
@@ -65,16 +60,14 @@ public class JwtProvider {
         try {
             return keyStore.getCertificate("springblog").getPublicKey();
         } catch (KeyStoreException e) {
-            throw new SpringRedditException("Exception occured while " +
-                    "retrieving public key from keystore", e);
+            throw new SpringRedditException("Exception occured while " + "retrieving public key from keystore", e);
         }
     }
 
-    public String getUsernameFromJwt(String token){
-        Claims claims = Jwts.parserBuilder().setSigningKey(getPublickey())
-                        .build().parseClaimsJws(token).getBody();
-                    
-                return claims.getSubject();
+    public String getUsernameFromJwt(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(getPublickey()).build().parseClaimsJws(token).getBody();
+
+        return claims.getSubject();
     }
 
 }
