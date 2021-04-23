@@ -1,14 +1,12 @@
 package com.grp6.reddit_clone.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
-import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -17,18 +15,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
-public class Subreddit {
+public class Comment {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @NotBlank(message = "Community name is required")
-    private String name;
-    @NotBlank(message = "Description is required")
-    private String description;
-    @OneToMany(fetch = LAZY)
-    private List<Post> posts;
+    @NotEmpty
+    private String text;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
+    private Post post;
     private Instant createdDate;
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }
