@@ -1,0 +1,64 @@
+<mxfile>
+    <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+        <mxGraphModel dx="1572" dy="1024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-1" value="Subreddit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="140" y="110" width="170" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-2" value="- id : Long&#10;- name : String&#10;- description : String&#10;- posts : List&lt;Post&gt;&#10;- createdDate : Instant&#10;- user : User&#10;&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-1" vertex="1">
+                    <mxGeometry y="26" width="170" height="104" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-7" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="360" y="110" width="170" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-8" value="- userId : Long&#10;- username : String&#10;- password : String&#10;- email : String&#10;- created : Instant&#10;-  enabled : boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-7" vertex="1">
+                    <mxGeometry y="26" width="170" height="104" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-10" value="Comment" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="140" y="260" width="170" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-11" value="- id : Long &#10;- text : String- post : Post&#10;- createdDate : Instant&#10;- user : User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-10" vertex="1">
+                    <mxGeometry y="26" width="170" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-12" value="NotificationEmail" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="360" y="260" width="170" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-13" value="- subject : String&#10;- recipient : String&#10;- body : String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-12" vertex="1">
+                    <mxGeometry y="26" width="170" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-14" value="Post" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="140" y="380" width="170" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-15" value="- postId : Long&#10;- postName : String&#10;- url : String&#10;- description : String&#10;- voteCount : Integer&#10;- user : User&#10;- createdDate : Instant&#10;- subreddit : Subreddit" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-14" vertex="1">
+                    <mxGeometry y="26" width="170" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-16" value="RefreshToken" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="360" y="380" width="170" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-17" value="- id : Long&#10;- token : String&#10;- createdDate : Instant" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-16" vertex="1">
+                    <mxGeometry y="26" width="170" height="64" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-18" value="VerificartionToken" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="140" y="560" width="170" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-19" value="- id : Long&#10;- token : String&#10;- user : User&#10;- expiryDate : Instant" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-18" vertex="1">
+                    <mxGeometry y="26" width="170" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-20" value="Vote" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="360" y="500" width="170" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-21" value="- voteId : Long  &#10;- voteType : VoteType&#10;- post : Post&#10;- user : User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="KnY3R8ZpVALi4FLhmtvJ-20" vertex="1">
+                    <mxGeometry y="26" width="170" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="KnY3R8ZpVALi4FLhmtvJ-22" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Enumeration&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;VoteType&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;UPVOTE(1)&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;DOWNVOTE(-1)&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;- direction : integer&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;+ lookup(Integer direction) : VoteType (static)&lt;br&gt;+ getDirection(): Integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="360" y="610" width="290" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="0" value="Model" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;fillColor=none;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+                    <mxGeometry x="50" y="40" width="680" height="770" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
