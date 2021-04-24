@@ -9,8 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    static Optional<User> findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null	;
-	}
+    Optional<User> findByUsername(String username);
 }
