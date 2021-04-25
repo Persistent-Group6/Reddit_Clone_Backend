@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthController {
 	
-	private final AuthService authService;
+	private final AuthService authService = new AuthService();
 	
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest){

@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MailContentBuilder {
 	
-	private final TemplateEngine templateEngine;
+	private final TemplateEngine templateEngine = new TemplateEngine();
 	
 	String build(String message) {
 		

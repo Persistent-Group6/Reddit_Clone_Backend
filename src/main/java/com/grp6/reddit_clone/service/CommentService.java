@@ -1,0 +1,58 @@
+package com.grp6.reddit_clone.service;
+
+import com.grp6.reddit_clone.dto.*;
+import com.grp6.reddit_clone.exceptions.PostNotFoundException;
+import com.grp6.reddit_clone.exceptions.SpringRedditException;
+import com.grp6.reddit_clone.mapper.*;
+import com.grp6.reddit_clone.model.*;
+import com.grp6.reddit_clone.repository.*;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
+@Service
+@AllArgsConstructor
+public class CommentService {
+    private static final String POST_URL = "";
+    private final PostRepository postRepository = null;
+    private final UserRepository userRepository = null;
+    private final AuthService authService = new AuthService();
+    private final CommentMapper commentMapper = null;
+    private final CommentRepository commentRepository = null;
+    private final MailContentBuilder mailContentBuilder = new MailContentBuilder();
+    private final MailService mailService = new MailService();
+
+    public void save(CommentsDto commentsDto) {
+        Post post = postRepository.findById(commentsDto.getPostId())
+                .orElseThrow(() -> new PostNotFoundException(commentsDto.getPostId().toString()));
+        Comment comment = commentMapper.map(commentsDto, post, authService.getCurrentUser());
+        commentRepository.save(comment);
+
+        String message = mailContentBuilder.build(authService.getCurrentUser() + " posted a comment on your post." + POST_URL);
+        sendCommentNotification(message, post.getUser());
+    }
+
+    private void sendCommentNotification(String message, User user) {
+        mailService.sendMail(new NotificationEmail());
+    }
+
+    public List<CommentsDto> getAllCommentsForPost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        return commentRepository.findByPost(post)
+                .stream()
+                .map(commentMapper::mapToDto).collect(toList());
+    }
+
+    public List<CommentsDto> getAllCommentsForUser(String userName) {
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new UsernameNotFoundException(userName));
+        return commentRepository.findAllByUser(user)
+                .stream()
+                .map(commentMapper::mapToDto)
+                .collect(toList());
+    }
+}

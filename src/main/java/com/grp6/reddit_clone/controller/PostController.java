@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PostController {
 
-    private final PostService postService;
+    private final PostService postService = new PostService();
 
     @PostMapping
     public ResponseEntity<PostRequest> createPost(@RequestBody PostRequest postRequest) {
