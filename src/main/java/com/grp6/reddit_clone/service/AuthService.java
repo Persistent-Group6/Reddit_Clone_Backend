@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.grp6.reddit_clone.dto.*;
+import com.grp6.reddit_clone.dto.AuthenticationResponse;
 import com.grp6.reddit_clone.dto.LoginRequest;
 import com.grp6.reddit_clone.dto.RefreshTokenRequest;
 import com.grp6.reddit_clone.dto.RegisterRequest;
@@ -12,10 +12,11 @@ import com.grp6.reddit_clone.exceptions.SpringRedditException;
 import com.grp6.reddit_clone.model.NotificationEmail;
 import com.grp6.reddit_clone.model.User;
 import com.grp6.reddit_clone.model.VerificationToken;
-import com.grp6.reddit_clone.repository.*;
+import com.grp6.reddit_clone.repository.UserRepository;
 import com.grp6.reddit_clone.repository.VerificationTokenRepository;
 import com.grp6.reddit_clone.security.JwtProvider;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -109,5 +110,10 @@ public class AuthService {
 				.refreshToken(refreshTokenRequest.getRefreshToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
 				.username(refreshTokenRequest.getUsername()).build();
+	}
+
+	public boolean isLoggedIn() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
 	}
 }
