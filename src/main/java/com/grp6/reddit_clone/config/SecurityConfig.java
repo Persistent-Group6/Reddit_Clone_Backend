@@ -22,8 +22,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService = null;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
+    private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
