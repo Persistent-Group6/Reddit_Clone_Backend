@@ -1,14 +1,10 @@
 package com.grp6.reddit_clone.mapper;
 
-import java.util.Optional;
-
 import com.grp6.reddit_clone.dto.PostRequest;
 import com.grp6.reddit_clone.dto.PostResponse;
 import com.grp6.reddit_clone.model.Post;
 import com.grp6.reddit_clone.model.Subreddit;
 import com.grp6.reddit_clone.model.User;
-import com.grp6.reddit_clone.model.Vote;
-import com.grp6.reddit_clone.model.VoteType;
 import com.grp6.reddit_clone.service.AuthService;
 
 import org.mapstruct.Mapper;

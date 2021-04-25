@@ -17,14 +17,15 @@ import static java.util.stream.Collectors.toList;
 @Service
 @AllArgsConstructor
 public class CommentService {
+
     private static final String POST_URL = "";
-    private final PostRepository postRepository = null;
-    private final UserRepository userRepository = null;
-    private final AuthService authService = new AuthService();
-    private final CommentMapper commentMapper = null;
-    private final CommentRepository commentRepository = null;
-    private final MailContentBuilder mailContentBuilder = new MailContentBuilder();
-    private final MailService mailService = new MailService();
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final AuthService authService;
+    private final CommentMapper commentMapper;
+    private final CommentRepository commentRepository;
+    private final MailContentBuilder mailContentBuilder;
+    private final MailService mailService;
 
     public void save(CommentsDto commentsDto) {
         Post post = postRepository.findById(commentsDto.getPostId())
@@ -32,27 +33,23 @@ public class CommentService {
         Comment comment = commentMapper.map(commentsDto, post, authService.getCurrentUser());
         commentRepository.save(comment);
 
-        String message = mailContentBuilder.build(authService.getCurrentUser() + " posted a comment on your post." + POST_URL);
+        String message = mailContentBuilder
+                .build(authService.getCurrentUser() + " posted a comment on your post." + POST_URL);
         sendCommentNotification(message, post.getUser());
     }
 
     private void sendCommentNotification(String message, User user) {
-        mailService.sendMail(new NotificationEmail());
+        mailService.sendMail(
+                new NotificationEmail(user.getUsername() + " Commented on your post", user.getEmail(), message));
     }
 
     public List<CommentsDto> getAllCommentsForPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        return commentRepository.findByPost(post)
-                .stream()
-                .map(commentMapper::mapToDto).collect(toList());
+        Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException(postId.toString()));
+        return commentRepository.findByPost(post).stream().map(commentMapper::mapToDto).collect(toList());
     }
 
     public List<CommentsDto> getAllCommentsForUser(String userName) {
-        User user = userRepository.findByUsername(userName)
-                .orElseThrow(() -> new UsernameNotFoundException(userName));
-        return commentRepository.findAllByUser(user)
-                .stream()
-                .map(commentMapper::mapToDto)
-                .collect(toList());
+        User user = userRepository.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException(userName));
+        return commentRepository.findAllByUser(user).stream().map(commentMapper::mapToDto).collect(toList());
     }
 }

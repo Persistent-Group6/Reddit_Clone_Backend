@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SubredditController {
 
-    private final SubredditService subredditService = new SubredditService();
+    private final SubredditService subredditService;
 
     @PostMapping
     public ResponseEntity<SubredditDto> createSubreddit(@RequestBody SubredditDto subredditDto) {

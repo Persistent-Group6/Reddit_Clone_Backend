@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin
 public class UserController {
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {

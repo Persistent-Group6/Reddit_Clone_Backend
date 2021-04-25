@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 public class MailService {
-	
-	private final JavaMailSender mailSender = null;
-	private final MailContentBuilder mailContentBuilder = new MailContentBuilder();
-	
+
+    private final JavaMailSender mailSender;
+    private final MailContentBuilder mailContentBuilder;
+
     @Async
-	public void sendMail(NotificationEmail notificationEmail) {
-		MimeMessagePreparator messagePreparator = mimeMessage -> {
+    public void sendMail(NotificationEmail notificationEmail) {
+        MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("springreddit@email.com");
             messageHelper.setTo(notificationEmail.getRecipient());
@@ -35,8 +35,8 @@ public class MailService {
             log.info("Activation email sent!!");
         } catch (MailException e) {
             log.error("Exception occurred when sending mail", e);
-            throw new SpringRedditException("Exception occurred when sending mail to " + notificationEmail.getRecipient(), e);
+            throw new SpringRedditException(
+                    "Exception occurred when sending mail to " + notificationEmail.getRecipient(), e);
         }
     }
 }
-
