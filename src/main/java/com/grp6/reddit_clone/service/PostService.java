@@ -44,7 +44,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostResponse getPost(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException(id.toString()));
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id.toString()));
         return postMapper.mapToDto(post);
     }
 
@@ -63,7 +64,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public List<PostResponse> getPostsByUsername(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
         return postRepository.findByUser(user).stream().map(postMapper::mapToDto).collect(toList());
     }
 }

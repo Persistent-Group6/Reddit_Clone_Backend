@@ -33,7 +33,8 @@ public class SubredditService {
     }
 
     public List<SubredditDto> getAll() {
-        return subredditRepository.findAll().stream().map(subredditMapper::mapSubredditToDto).collect(toList());
+        return subredditRepository.findAll().stream().map(subredditMapper::mapSubredditToDto)
+                .collect(toList());
     }
 
     public SubredditDto getSubreddit(Long id) {
